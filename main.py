@@ -1,3 +1,4 @@
+from unittest.mock import Base
 from fastapi import FastAPI
 from pydantic import BaseModel
 from FileOp import getData,saveData
@@ -8,6 +9,10 @@ Profile = getData('profile.json')
 class PlayerProfile(BaseModel):
     username: str
     password: str
+
+class UpdateMMR(BaseModel):
+    username: str
+    score: int
 
 @app.get("/")
 async def get_player_profile():
@@ -36,3 +41,25 @@ async def create_new_account(new_player:PlayerProfile):
         Profile["latetest_id"] += 1
         saveData('profile.json',Profile)
         return new_account
+
+@app.patch("/")
+async def update_mmr(update:UpdateMMR):
+    try:
+        update = update.dict()
+        Profile["data"][update["username"].lower()]["score"] += update["score"]
+    except:
+        return {"Error":"Try Again!"}
+    else:
+        saveData('profile.json',Profile)
+        return Profile["data"][update["username"].lower()]
+
+@app.delete("/")
+async def delete_account(username:str):
+    try:
+        target = Profile["data"][username.lower()]
+        del Profile["data"][username.lower()]
+    except:
+        return {"Error":"User Not Found!"}
+    else:
+        saveData('profile.json',Profile)
+        return target
