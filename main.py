@@ -2,17 +2,10 @@ from unittest.mock import Base
 from fastapi import FastAPI
 from pydantic import BaseModel
 from FileOp import getData,saveData
+from RequestModel import *
 
 app = FastAPI()
 Profile = getData('profile.json')
-
-class PlayerProfile(BaseModel):
-    username: str
-    password: str
-
-class UpdateMMR(BaseModel):
-    username: str
-    score: int
 
 @app.get("/")
 async def get_player_profile():
