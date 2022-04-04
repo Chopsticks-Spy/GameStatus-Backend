@@ -6,13 +6,14 @@ from RequestModel import *
 
 app = FastAPI()
 Profile = getData('profile.json')
+Status = getData('status.json')
 
-@app.get("/")
+@app.get("/player")
 async def get_player_profile():
     Profile = getData('profile.json')
     return Profile
 
-@app.post("/")
+@app.post("/player")
 async def create_new_account(new_player:PlayerProfile):
     try:
         new_player = new_player.dict()
@@ -35,7 +36,7 @@ async def create_new_account(new_player:PlayerProfile):
         saveData('profile.json',Profile)
         return new_account
 
-@app.patch("/")
+@app.patch("/player")
 async def update_mmr(update:UpdateMMR):
     try:
         update = update.dict()
@@ -46,7 +47,7 @@ async def update_mmr(update:UpdateMMR):
         saveData('profile.json',Profile)
         return Profile["data"][update["username"].lower()]
 
-@app.delete("/")
+@app.delete("/player")
 async def delete_account(username:str):
     try:
         target = Profile["data"][username.lower()]
@@ -56,3 +57,17 @@ async def delete_account(username:str):
     else:
         saveData('profile.json',Profile)
         return target
+
+@app.get("/status")
+async def get_status():
+    return Status["ongoing"]
+
+@app.patch("/status")
+async def update_status(state:bool):
+    try:
+        Status["ongoing"] = state
+    except:
+        return {"Error":"User Not Found!"}
+    else:
+        saveData('status.json',Status)
+        return Status["ongoing"]
