@@ -7,3 +7,10 @@ class PlayerProfile(BaseModel):
 class UpdateMMR(BaseModel):
     username: str
     score: int
+
+class GameStatus(BaseModel):
+    isActive: bool
+    isWin: int
+    ls1: bool
+    ls2: bool
+    ls3: bool

@@ -1,3 +1,4 @@
+from os import stat
 from unittest.mock import Base
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -60,14 +61,19 @@ async def delete_account(username:str):
 
 @app.get("/status")
 async def get_status():
-    return Status["ongoing"]
+    return Status
 
 @app.patch("/status")
-async def update_status(state:bool):
+async def update_status(status:GameStatus):
     try:
-        Status["ongoing"] = state
+        status = status.dict()
+        Status["isActive"] = status["isActive"]
+        Status["isWin"] = status["isWin"]
+        Status["ls1"] = status["ls1"]
+        Status["ls2"] = status["ls2"]
+        Status["ls3"] = status["ls3"]
     except:
         return {"Error":"User Not Found!"}
     else:
         saveData('status.json',Status)
-        return Status["ongoing"]
+        return Status
