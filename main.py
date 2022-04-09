@@ -69,9 +69,7 @@ async def update_status(status:GameStatus):
         status = status.dict()
         Status["isActive"] = status["isActive"]
         Status["isWin"] = status["isWin"]
-        Status["ls1"] = status["ls1"]
-        Status["ls2"] = status["ls2"]
-        Status["ls3"] = status["ls3"]
+        Status["activeLaser"] = status["activeLaser"]
     except:
         return {"Error":"User Not Found!"}
     else:

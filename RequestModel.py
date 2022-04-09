@@ -11,6 +11,4 @@ class UpdateMMR(BaseModel):
 class GameStatus(BaseModel):
     isActive: bool
     isWin: int
-    ls1: bool
-    ls2: bool
-    ls3: bool
+    activeLaser: list
