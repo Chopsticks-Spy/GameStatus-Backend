@@ -8,6 +8,7 @@ from RequestModel import *
 app = FastAPI()
 Profile = getData('profile.json')
 Status = getData('status.json')
+Scoreboard = getData('scoreboard.json')
 
 @app.get("/player")
 async def get_player_profile():
@@ -75,3 +76,27 @@ async def update_status(status:GameStatus):
     else:
         saveData('status.json',Status)
         return Status
+
+@app.get("/scoreboard")
+async def get_scoreboard():
+    return Scoreboard
+
+@app.post("/scoreboard")
+async def post_scoreboard(scoreboard:ScoreboardInstance):
+    try:
+        scoreboard = scoreboard.dict()
+
+        new_score = {
+            "name": scoreboard['name'],
+            "laser": scoreboard['laser'],
+            "hp": scoreboard['hp'],
+            "time": scoreboard['time']
+        }
+
+        Scoreboard['data'].append(new_score)
+    except:
+        return {"Error":"User Not Found!"}
+    else:
+        saveData('scoreboard.json',Scoreboard)
+        return new_score
+

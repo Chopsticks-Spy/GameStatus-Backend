@@ -1,0 +1,22 @@
+{
+    "data":[
+        {
+            "name": "asdlfkw",
+            "laser": [1,1,0,0,0],
+            "hp": 3,
+            "time": 12.23
+        },
+        {
+            "name": "asdlfkw",
+            "laser": [1,1,0,0,0],
+            "hp": 3,
+            "time": 12.23
+        },
+        {
+            "name": "asdlfkw",
+            "laser": [1,1,0,0,0],
+            "hp": 3,
+            "time": 12.23
+        }
+    ]
+}
