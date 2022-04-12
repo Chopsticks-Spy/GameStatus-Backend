@@ -71,6 +71,8 @@ async def update_status(status:GameStatus):
         Status["isActive"] = status["isActive"]
         Status["isWin"] = status["isWin"]
         Status["activeLaser"] = status["activeLaser"]
+        Status["hp"] = status["hp"]
+        Status["time"] = status["time"]
     except:
         return {"Error":"User Not Found!"}
     else:

@@ -12,6 +12,8 @@ class GameStatus(BaseModel):
     isActive: bool
     isWin: int
     activeLaser: list
+    hp: int
+    time: float
 
 class ScoreboardInstance(BaseModel):
     name: str
