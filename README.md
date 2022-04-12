@@ -1,4 +1,4 @@
-# GameStatus-Backend
+# Backend
 Repository นี้เก็บการทำงานในส่วน Backend ทั้งหมดเป็นทั้งที่เก็บข้อมูลการดำเนินการของเกมต่างๆ และส่งข้อมูลระหว่าง Frontend และ Firmware
 
 - `main.py` โปรแกรมหลักในการทำงานของส่วน Backend  
